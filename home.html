@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Bio Generator & Username Finder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+    }
+    .instagram-shadow {
+      box-shadow: 0 4px 14px rgba(131, 58, 180, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold mb-3 text-transparent bg-clip-text gradient-bg">Instagram Bio & Username Generator</h1>
+      <p class="text-gray-600 text-lg mb-6">Stand out on Instagram with stylish, aesthetic, and catchy bios or usernames tailored to your vibe</p>
+      <div class="flex flex-wrap justify-center gap-2 text-sm">
+        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">100K+ Monthly Searches</span>
+        <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full">AI-Powered</span>
+        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full">Personalized Results</span>
+      </div>
+      <div class="mt-4">
+        <a href="marketing.html" class="text-pink-600 hover:text-pink-700 underline font-medium">Learn more about our tool</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 instagram-shadow">
+      <!-- Tabs -->
+      <div class="flex mb-6 border-b">
+        <button id="bioTab" class="tab-btn active px-4 py-3 font-medium text-pink-600 border-b-2 border-pink-600">Generate Bio</button>
+        <button id="usernameTab" class="tab-btn px-4 py-3 font-medium text-gray-500">Find Username</button>
+        <button id="imageTab" class="tab-btn px-4 py-3 font-medium text-gray-500">Image Inspiration</button>
+      </div>
+
+      <!-- Bio & Username Form -->
+      <div id="textForm" class="space-y-5">
+        <div>
+          <label class="block text-gray-700 mb-2">Name/Brand (Optional)</label>
+          <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Your name or brand">
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">What are you passionate about? (Optional)</label>
+          <input type="text" id="interests" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Travel, Fashion, Gaming, Photography, etc.">
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">Choose your style</label>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Funny">Funny</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Creative">Creative</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Professional">Professional</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Minimalist">Minimalist</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Aesthetic">Aesthetic</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Quotes">Quotes</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Gamer">Gamer</button>
+            <button class="style-btn p-3 bg-gray-100 rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:outline-none transition" data-style="Business">Business</button>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="w-full py-3 px-4 gradient-bg text-white font-medium rounded-lg hover:opacity-90 transition">Generate Now</button>
+      </div>
+
+      <!-- Image Analysis Form -->
+      <div id="imageForm" class="space-y-5 hidden">
+        <div>
+          <label class="block text-gray-700 mb-2">Upload an image for inspiration</label>
+          <p class="text-sm text-gray-500 mb-3">We'll analyze your image and create a bio or username that matches its vibe and aesthetic.</p>
+          
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center" id="dropArea">
+            <div class="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <p class="text-gray-500">Drag and drop your image here, or <span class="text-pink-500 cursor-pointer" id="browseBtn">browse</span></p>
+            <input type="file" id="fileInput" accept="image/*" class="hidden">
+          </div>
+          
+          <div id="imagePreview" class="mt-4 hidden">
+            <div class="relative">
+              <img id="previewImg" src="#" alt="Uploaded Image" class="w-full h-56 object-cover rounded-lg">
+              <button id="removeImageBtn" class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 mb-2">What would you like to generate?</label>
+          <div class="flex gap-3">
+            <label class="flex items-center">
+              <input type="radio" name="imageGenType" value="bio" checked class="text-pink-500 focus:ring-pink-500">
+              <span class="ml-2">Instagram Bio</span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="imageGenType" value="username" class="text-pink-500 focus:ring-pink-500">
+              <span class="ml-2">Username Ideas</span>
+            </label>
+          </div>
+        </div>
+
+        <button id="analyzeImageBtn" class="w-full py-3 px-4 gradient-bg text-white font-medium rounded-lg hover:opacity-90 transition opacity-50 cursor-not-allowed" disabled>Analyze Image</button>
+      </div>
+
+      <!-- Results -->
+      <div id="result" class="mt-8 hidden">
+        <h3 class="text-lg font-semibold mb-3 text-gray-800">Generated Results:</h3>
+        <div id="resultContent" class="p-5 bg-gray-100 rounded-lg space-y-4">
+          <!-- Results will appear here -->
+        </div>
+        <div class="mt-4 flex justify-end">
+          <button id="copyBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Copy to Clipboard</button>
+        </div>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div id="loading" class="hidden mt-8 text-center">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-pink-500 border-t-transparent"></div>
+        <p class="mt-2 text-gray-600">Creating your perfect Instagram content...</p>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="mt-12 grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-5 rounded-xl shadow-md">
+        <div class="flex items-center mb-3">
+          <div class="h-10 w-10 rounded-full bg-purple-200 flex items-center justify-center text-purple-600 font-bold">S</div>
+          <div class="ml-3">
+            <h4 class="font-medium">Sarah</h4>
+            <div class="flex text-yellow-400 text-sm">★★★★★</div>
+          </div>
+        </div>
+        <p class="text-gray-600">"Got a cool aesthetic bio that perfectly matches my photography style. Love it!"</p>
+      </div>
+      <div class="bg-white p-5 rounded-xl shadow-md">
+        <div class="flex items-center mb-3">
+          <div class="h-10 w-10 rounded-full bg-blue-200 flex items-center justify-center text-blue-600 font-bold">M</div>
+          <div class="ml-3">
+            <h4 class="font-medium">Mike</h4>
+            <div class="flex text-yellow-400 text-sm">★★★★★</div>
+          </div>
+        </div>
+        <p class="text-gray-600">"Finally found the perfect gaming username after months of searching. This tool is amazing!"</p>
+      </div>
+      <div class="bg-white p-5 rounded-xl shadow-md">
+        <div class="flex items-center mb-3">
+          <div class="h-10 w-10 rounded-full bg-pink-200 flex items-center justify-center text-pink-600 font-bold">J</div>
+          <div class="ml-3">
+            <h4 class="font-medium">Jessica</h4>
+            <div class="flex text-yellow-400 text-sm">★★★★★</div>
+          </div>
+        </div>
+        <p class="text-gray-600">"Our small business got a professional bio that helped increase our followers by 30%. Highly recommend!"</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Selected style and current mode (bio or username)
+    let selectedStyle = "";
+    let currentMode = "bio";
+    let uploadedImage = null;
+    
+    // Add event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab switching
+      document.getElementById('bioTab').addEventListener('click', () => switchTab('bio'));
+      document.getElementById('usernameTab').addEventListener('click', () => switchTab('username'));
+      document.getElementById('imageTab').addEventListener('click', () => switchTab('image'));
+      
+      // Style selection
+      document.querySelectorAll('.style-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('bg-pink-100'));
+          this.classList.add('bg-pink-100');
+          selectedStyle = this.getAttribute('data-style');
+        });
+      });
+      
+      // Generate button
+      document.getElementById('generateBtn').addEventListener('click', generateContent);
+      
+      // Copy button
+      document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
+      
+      // Image upload functionality
+      const dropArea = document.getElementById('dropArea');
+      const fileInput = document.getElementById('fileInput');
+      const browseBtn = document.getElementById('browseBtn');
+      const analyzeImageBtn = document.getElementById('analyzeImageBtn');
+      const removeImageBtn = document.getElementById('removeImageBtn');
+      
+      browseBtn.addEventListener('click', () => fileInput.click());
+      
+      // Handle file selection
+      fileInput.addEventListener('change', handleFile);
+      
+      // Drag and drop events
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+      });
+      
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+      });
+      
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+      });
+      
+      function highlight() {
+        dropArea.classList.add('border-pink-400', 'bg-pink-50');
+      }
+      
+      function unhighlight() {
+        dropArea.classList.remove('border-pink-400', 'bg-pink-50');
+      }
+      
+      // Handle dropped files
+      dropArea.addEventListener('drop', handleDrop, false);
+      
+      function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        if (files.length) {
+          handleFile({ target: { files: files } });
+        }
+      }
+      
+      // Process the file
+      function handleFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        // Validate file is an image
+        if (!file.type.match('image.*')) {
+          alert('Please upload an image file (jpg, png, etc.)');
+          return;
+        }
+        
+        uploadedImage = file;
+        
+        // Show image preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const previewImg = document.getElementById('previewImg');
+          previewImg.src = e.target.result;
+          document.getElementById('imagePreview').classList.remove('hidden');
+          analyzeImageBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+          analyzeImageBtn.disabled = false;
+        }
+        reader.readAsDataURL(file);
+      }
+      
+      // Remove uploaded image
+      removeImageBtn.addEventListener('click', function() {
+        document.getElementById('imagePreview').classList.add('hidden');
+        document.getElementById('fileInput').value = '';
+        uploadedImage = null;
+        analyzeImageBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        analyzeImageBtn.disabled = true;
+      });
+      
+      // Analyze image button
+      analyzeImageBtn.addEventListener('click', analyzeImage);
+    });
+    
+    // Switch between tabs
+    function switchTab(mode) {
+      // Update current mode
+      currentMode = mode === 'image' ? document.querySelector('input[name="imageGenType"]:checked').value : mode;
+      
+      // Update tab styling
+      document.querySelectorAll('.tab-btn').forEach(tab => {
+        tab.classList.remove('text-pink-600', 'border-b-2', 'border-pink-600');
+        tab.classList.add('text-gray-500');
+      });
+      
+      const activeTab = document.getElementById(`${mode}Tab`);
+      activeTab.classList.add('text-pink-600', 'border-b-2', 'border-pink-600');
+      activeTab.classList.remove('text-gray-500');
+      
+      // Show/hide appropriate form
+      if (mode === 'image') {
+        document.getElementById('textForm').classList.add('hidden');
+        document.getElementById('imageForm').classList.remove('hidden');
+      } else {
+        document.getElementById('textForm').classList.remove('hidden');
+        document.getElementById('imageForm').classList.add('hidden');
+      }
+      
+      // Hide result when switching tabs
+      document.getElementById('result').classList.add('hidden');
+    }
+    
+    // Generate content based on text inputs
+    async function generateContent() {
+      const name = document.getElementById('name').value;
+      const interests = document.getElementById('interests').value;
+      
+      if (!selectedStyle) {
+        alert('Please select a style first!');
+        return;
+      }
+      
+      // Show loading indicator
+      document.getElementById('loading').classList.remove('hidden');
+      document.getElementById('result').classList.add('hidden');
+      
+      try {
+        const prompt = currentMode === 'bio' 
+          ? `Create an Instagram bio for ${name || 'someone'} who is interested in ${interests || 'various topics'}. 
+             The bio should be in a ${selectedStyle} style. Make it catchy, aesthetic, and include emojis.
+             Provide 3 different options, each limited to 150 characters.`
+          : `Create unique Instagram username suggestions for ${name || 'someone'} who is interested in ${interests || 'various topics'}.
+             The usernames should be in a ${selectedStyle} style. Make them memorable, available-sounding, and catchy.
+             Provide 5 different options.`;
+        
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer <OPENROUTER_API_KEY>", // Replace with your API key
+            "HTTP-Referer": "<YOUR_SITE_URL>", // Replace with your site URL
+            "X-Title": "Instagram Bio Generator", // Replace with your app name
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "deepseek/deepseek-chat-v3-0324:free",
+            messages: [
+              {
+                role: "user",
+                content: prompt
+              }
+            ]
+          })
+        });
+        
+        const data = await response.json();
+        const content = data.choices?.[0]?.message?.content || "Sorry, we couldn't generate content at this time. Please try again.";
+        
+        // Format and display results
+        document.getElementById('resultContent').innerHTML = formatResults(content, currentMode);
+        document.getElementById('result').classList.remove('hidden');
+      } catch (error) {
+        console.error("Error generating content:", error);
+        document.getElementById('resultContent').innerHTML = "An error occurred. Please try again later.";
+        document.getElementById('result').classList.remove('hidden');
+      } finally {
+        document.getElementById('loading').classList.add('hidden');
+      }
+    }
+    
+    // Analyze image and generate content
+    async function analyzeImage() {
+      if (!uploadedImage) {
+        alert('Please upload an image first');
+        return;
+      }
+      
+      // Show loading indicator
+      document.getElementById('loading').classList.remove('hidden');
+      document.getElementById('result').classList.add('hidden');
+      
+      try {
+        // Get the image as base64
+        const reader = new FileReader();
+        reader.readAsDataURL(uploadedImage);
+        
+        reader.onload = async function() {
+          const imageBase64 = reader.result.split(',')[1];
+          const genType = document.querySelector('input[name="imageGenType"]:checked').value;
+          
+          const prompt = genType === 'bio' 
+            ? "Based on this image, create 3 Instagram bio options that match its mood, aesthetic, and vibe. Include relevant emojis and keep each bio under 150 characters."
+            : "Based on this image, suggest 5 unique and creative Instagram username ideas that match its aesthetic and mood. Make them catchy and memorable.";
+          
+          const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer <OPENROUTER_API_KEY>", // Replace with your API key
+              "HTTP-Referer": "<YOUR_SITE_URL>", // Replace with your site URL
+              "X-Title": "Instagram Bio Generator", // Replace with your app name
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              model: "openai/gpt-4.1",
+              messages: [
+                {
+                  role: "user",
+                  content: [
+                    {
+                      type: "text",
+                      text: prompt
+                    },
+                    {
+                      type: "image_url",
+                      image_url: {
+                        url: `data:image/jpeg;base64,${imageBase64}`
+                      }
+                    }
+                  ]
+                }
+              ]
+            })
+          });
+          
+          const data = await response.json();
+          const content = data.choices?.[0]?.message?.content || "Sorry, we couldn't generate content based on this image. Please try again.";
+          
+          // Format and display results
+          document.getElementById('resultContent').innerHTML = formatResults(content, genType);
+          document.getElementById('result').classList.remove('hidden');
+          document.getElementById('loading').classList.add('hidden');
+        };
+      } catch (error) {
+        console.error("Error analyzing image:", error);
+        document.getElementById('resultContent').innerHTML = "An error occurred while analyzing the image. Please try again later.";
+        document.getElementById('result').classList.remove('hidden');
+        document.getElementById('loading').classList.add('hidden');
+      }
+    }
+    
+    // Format the results based on current mode
+    function formatResults(content, mode) {
+      if (mode === 'bio') {
+        // Try to identify different bio options and format them
+        const bios = content.split(/\d+[\.\)]/);
+        return bios
+          .filter(bio => bio.trim().length > 0)
+          .map(bio => `<div class="p-3 bg-white rounded-md shadow-sm hover:shadow">${bio.trim()}</div>`)
+          .join('');
+      } else {
+        // Format username suggestions
+        const usernames = content.split(/\d+[\.\)]/);
+        return usernames
+          .filter(username => username.trim().length > 0)
+          .map(username => `<div class="p-3 bg-white rounded-md shadow-sm hover:shadow">${username.trim()}</div>`)
+          .join('');
+      }
+    }
+    
+    // Copy to clipboard function
+    function copyToClipboard() {
+      const resultDiv = document.getElementById('resultContent');
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = resultDiv.innerText;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+      
+      // Show feedback
+      const copyBtn = document.getElementById('copyBtn');
+      const originalText = copyBtn.innerText;
+      copyBtn.innerText = "Copied!";
+      copyBtn.classList.add('bg-green-500', 'text-white');
+      copyBtn.classList.remove('bg-gray-200', 'text-gray-700');
+      
+      setTimeout(() => {
+        copyBtn.innerText = originalText;
+        copyBtn.classList.remove('bg-green-500', 'text-white');
+        copyBtn.classList.add('bg-gray-200', 'text-gray-700');
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html> 
