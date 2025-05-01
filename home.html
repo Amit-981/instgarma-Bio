@@ -338,6 +338,30 @@
              The usernames should be in a ${selectedStyle} style. Make them memorable, available-sounding, and catchy.
              Provide 5 different options.`;
         
+        // Instead of actual API call, create mock response
+        // This is a temporary solution until you get your API key
+        setTimeout(() => {
+          let mockContent = "";
+          
+          if (currentMode === 'bio') {
+            mockContent = `1. ✨ ${interests || 'Life'} enthusiast | ${selectedStyle} vibes only | Making memories one post at a time 📸 | DM for collabs 💌 | ${name || 'Living my best life'} ⚡️\n\n` +
+                         `2. 🌟 ${selectedStyle} lover | Exploring ${interests || 'the world'} daily | Creating not competing 💫 | ${name || 'Dream chaser'} | Links in bio 👇\n\n` + 
+                         `3. ${name || 'Just someone'} who loves ${interests || 'beautiful things'} ✨ | ${selectedStyle} aesthetic | Good vibes only 🌈 | Let's connect 💌`;
+          } else {
+            mockContent = `1. ${selectedStyle}${name || 'Amazing'}${interests || 'Vibes'}\n\n` +
+                         `2. The${selectedStyle}${name || 'Creator'}\n\n` +
+                         `3. ${interests || 'Awesome'}${selectedStyle}${name || 'Soul'}\n\n` +
+                         `4. ${name || 'Official'}${selectedStyle}${interests || 'Account'}\n\n` +
+                         `5. ${selectedStyle}${interests || 'Lover'}${name || ''}`;
+          }
+          
+          document.getElementById('resultContent').innerHTML = formatResults(mockContent, currentMode);
+          document.getElementById('result').classList.remove('hidden');
+          document.getElementById('loading').classList.add('hidden');
+        }, 1500);
+        
+        /*
+        // ⚠️ UNCOMMENT THIS WHEN YOU HAVE API KEY ⚠️
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
           headers: {
@@ -363,6 +387,7 @@
         // Format and display results
         document.getElementById('resultContent').innerHTML = formatResults(content, currentMode);
         document.getElementById('result').classList.remove('hidden');
+        */
       } catch (error) {
         console.error("Error generating content:", error);
         document.getElementById('resultContent').innerHTML = "An error occurred. Please try again later.";
@@ -396,6 +421,29 @@
             ? "Based on this image, create 3 Instagram bio options that match its mood, aesthetic, and vibe. Include relevant emojis and keep each bio under 150 characters."
             : "Based on this image, suggest 5 unique and creative Instagram username ideas that match its aesthetic and mood. Make them catchy and memorable.";
           
+          // Mock response for image analysis
+          setTimeout(() => {
+            let mockContent = "";
+            
+            if (genType === 'bio') {
+              mockContent = `1. 📸 Capturing moments that tell stories | Visual storyteller | Colors and frames | Life through my lens ✨\n\n` +
+                           `2. 🎨 Finding beauty in everyday scenes | Visual poetry | Aesthetic hunter | Frames that speak 💭\n\n` + 
+                           `3. ✨ Life in pixels | Mood capturer | Visual diary | Stories through images 🌈`;
+            } else {
+              mockContent = `1. VisualStoryTeller\n\n` +
+                           `2. MoodCapturer\n\n` +
+                           `3. FramePoet\n\n` +
+                           `4. PixelDreamer\n\n` +
+                           `5. AestheticHunter`;
+            }
+            
+            document.getElementById('resultContent').innerHTML = formatResults(mockContent, genType);
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('loading').classList.add('hidden');
+          }, 1500);
+          
+          /*
+          // ⚠️ UNCOMMENT THIS WHEN YOU HAVE API KEY ⚠️
           const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -433,6 +481,7 @@
           document.getElementById('resultContent').innerHTML = formatResults(content, genType);
           document.getElementById('result').classList.remove('hidden');
           document.getElementById('loading').classList.add('hidden');
+          */
         };
       } catch (error) {
         console.error("Error analyzing image:", error);
