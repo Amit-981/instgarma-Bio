@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Username Suggestions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+    }
+    .gradient-bg {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+    }
+    .instagram-shadow {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    .hover-animate {
+      transition: transform 0.3s ease;
+    }
+    .hover-animate:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-5xl md:text-6xl font-bold mb-3 text-transparent bg-clip-text gradient-bg">Instagram Username Suggestions</h1>
+      <p class="text-gray-700 text-lg mb-6">Find the perfect Instagram username that suits your style and personality</p>
+    </div>
+
+    <!-- Username Suggestion Form -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 instagram-shadow hover-animate">
+      <div class="space-y-5">
+        <div>
+          <label class="block text-gray-700 mb-2">Enter your interests or keywords</label>
+          <input type="text" id="keywords" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Travel, Fashion, Gaming">
+        </div>
+
+        <button id="suggestBtn" class="w-full py-3 px-4 gradient-bg text-white font-medium rounded-lg hover:opacity-90 transition">Suggest Usernames</button>
+      </div>
+
+      <!-- Suggested Usernames -->
+      <div id="suggestions" class="mt-8 hidden">
+        <h3 class="text-lg font-semibold mb-3 text-gray-800">Suggested Usernames:</h3>
+        <div id="suggestionContent" class="p-5 bg-gray-100 rounded-lg space-y-4">
+          <!-- Suggestions will appear here -->
+        </div>
+        <div class="flex justify-between mt-4">
+          <button id="prevBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition" disabled>Previous</button>
+          <button id="nextBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Next</button>
+        </div>
+      </div>
+      
+
+      <!-- Loading Indicator -->
+      <div id="loading" class="hidden mt-8 text-center">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
+        <p class="mt-2 text-gray-600">Generating username suggestions...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('suggestBtn').addEventListener('click', function() {
+      const keywords = document.getElementById('keywords').value.trim();
+      if (!keywords) {
+        alert('Please enter some keywords or interests!');
+        return;
+      }
+
+      // Show loading indicator
+      document.getElementById('loading').classList.remove('hidden');
+      document.getElementById('suggestions').classList.add('hidden');
+
+      // Generate mock username suggestions
+      setTimeout(() => {
+        const mockUsernames = [
+  `${keywords}Explorer`,
+  `The${keywords}Guru`,
+  `${keywords}Lover`,
+  `Official${keywords}Fan`,
+  `${keywords}Dreamer`,
+  `${keywords}Adventurer`,
+  `Creative${keywords}`,
+  `${keywords}Master`,
+  `TheReal${keywords}`,
+  `${keywords}Vibes`,
+  `Insta${keywords}Star`,
+  `${keywords}_123`,
+  `${keywords}99`,
+  `Real${keywords}007`,
+  `Xx_${keywords}_xX`,
+  `${keywords}_King`,
+  `${keywords}Queen_01`,
+  `${keywords}Fanatic2025`,
+  `Mr_${keywords}`,
+  `Miss_${keywords}123`,
+  `${keywords}_Forever`,
+  `${keywords}_Nation`,
+  `Iam${keywords}`,
+  `${keywords}__Official`,
+  `${keywords}_xoxo`,
+  `${keywords}TheGreat`,
+  `Its${keywords}`,
+  `${keywords}Zone`,
+  `Team${keywords}`,
+  `${keywords}_4Life`,
+  `Only_${keywords}`,
+  `${keywords}ProMax`,
+  `${keywords}1234`,
+  `${keywords}_World`,
+  `${keywords}_V2`,
+  `Crazy${keywords}`,
+  `${keywords}_Hub`,
+  `The_${keywords}_01`,
+  `Ultra${keywords}9000`,
+  `${keywords}Xpress`,
+  `iAm${keywords}2024`,
+  `${keywords}Dev`,
+  `${keywords}Byte`,
+  `${keywords}_Saga`,
+  `OG${keywords}`,
+  `${keywords}_Reloaded`,
+  `${keywords}_Sky`,
+  `${keywords}_Wave`,
+  `Dr_${keywords}`,
+  `${keywords}_Beast`,
+  `${keywords}001`,
+  `${keywords}360`,
+  `${keywords}_Power`,
+  `No1${keywords}`,
+  `Legend${keywords}`,
+  `${keywords}Official01`,
+  `Best_${keywords}_Ever`,
+  `${keywords}_x`,
+  `${keywords}_09`,
+  `Elite${keywords}`,
+  `Silent${keywords}`,
+  `Dark${keywords}`,
+  `${keywords}Wizard`,
+  `${keywords}_Crafted`,
+  `${keywords}9999`,
+
+  // 🌈 Stylish / Fancy Unicode
+  `𝓜𝓻_${keywords}`,
+  `𝕸𝖗${keywords}`,
+  `🅜🅘🅢🅢_${keywords}`,
+  `『${keywords}』`,
+  `☆${keywords}☆`,
+  `•${keywords}•`,
+  `彡${keywords}彡`,
+  `꧁༒${keywords}༒꧂`,
+  `༺${keywords}༻`,
+  `⫷${keywords}⫸`,
+  `《${keywords}_007》`,
+  `『${keywords}_PRO』`,
+  `【${keywords}_VIP】`,
+  `𓆩${keywords}𓆪`,
+  `ƬℋΣ_${keywords}`,
+  `ɮɛʂʈ_${keywords}`,
+  `ʍʀ_${keywords}`,
+  `𝑬𝒍𝒊𝒕𝒆_${keywords}`,
+
+  // 🎭 Emoji-Enhanced Usernames
+  `🔥${keywords}_King`,
+  `${keywords}💎Queen`,
+  `💥Real${keywords}`,
+  `🌈${keywords}_Star`,
+  `${keywords}⚡Xpress`,
+  `✨${keywords}_Vibe`,
+  `🧠${keywords}_Genius`,
+  `${keywords}🧊Cool`,
+  `${keywords}_Beast🐾`,
+  `${keywords}💻Coder`,
+  `📸Insta${keywords}`,
+  `🎮${keywords}_Gamer`,
+  `🎨${keywords}_Art`,
+  `${keywords}_🌟Pro`,
+  `🚀${keywords}Blast`,
+  `🛡️OG_${keywords}`,
+  `🧬${keywords}_DNA`,
+  `${keywords}_Zone🌍`,
+  `🧙‍♂️${keywords}Wizard`,
+  `🏆${keywords}_Champ`,
+  `⚔️${keywords}_Slayer`,
+  `🧸Cuddly${keywords}`,
+  `🎧${keywords}_Beats`,
+  `🐍${keywords}Dev`,
+  `🚨${keywords}_Alert`,
+  `🎯${keywords}_Target`,
+  `🥇Elite_${keywords}`,
+  `${keywords}_Legit🔥`,
+  `👑The_${keywords}`,
+  `🕶️${keywords}_Agent`,
+  `🍕${keywords}_Slice`,
+  `🧁Sweet${keywords}`,
+  `🔮Mystic_${keywords}`,
+  `🌪️${keywords}_Storm`,
+  `🎭Masked${keywords}`,
+  `🫧${keywords}_Bubbles`,
+  `🛸Alien${keywords}`,
+  `🪄Magic_${keywords}`,
+  `🐲${keywords}_Dragon`,
+  `🦄${keywords}_Sparkle`,
+  `🍀Lucky${keywords}`,
+  `🧃Juicy_${keywords}`,
+  `💫${keywords}_Nova`,
+  `🌟Star_${keywords}`,
+  `🧊${keywords}_Freeze`,
+  `🕹️${keywords}_Player1`,
+  `🧞Wish${keywords}`,
+  `📦${keywords}_Box`,
+  `🐼Panda${keywords}`,
+  `🍉${keywords}_Melon`,
+  `🚗Speedy${keywords}`,
+  `📀${keywords}_Mix`,
+  `📚Nerdy${keywords}`
+];
+
+
+        let currentPage = 0;
+        const itemsPerPage = 10;
+
+        function renderPage(page) {
+          const start = page * itemsPerPage;
+          const end = start + itemsPerPage;
+          const pageUsernames = mockUsernames.slice(start, end);
+
+          document.getElementById('suggestionContent').innerHTML = pageUsernames
+            .map(username => `<div class="p-3 bg-white rounded-md shadow-sm hover:shadow">${username}</div>`)
+            .join('');
+
+          document.getElementById('prevBtn').disabled = page === 0;
+          document.getElementById('nextBtn').disabled = end >= mockUsernames.length;
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+          if (currentPage > 0) {
+            currentPage--;
+            renderPage(currentPage);
+          }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+          if ((currentPage + 1) * itemsPerPage < mockUsernames.length) {
+            currentPage++;
+            renderPage(currentPage);
+          }
+        });
+
+        renderPage(currentPage);
+        document.getElementById('suggestions').classList.remove('hidden');
+        document.getElementById('loading').classList.add('hidden');
+      }, 1500);
+    });
+  </script>
+
+</body>
+</html>
